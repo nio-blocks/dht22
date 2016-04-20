@@ -7,23 +7,17 @@ dht_bash is from the [Adafruit library](https://github.com/adafruit/Adafruit-Ras
 Properties
 ----------
 
--   **pins**: Select which pins the DHT is connected on
- -   **name**: The name of the pin. All pins are put through a pin.name.format(pin.number)
- -   **number**: The pin number
+-   **pin_number**: Select which pin the DHT is connected on
 
 Dependencies
 ------------
--   linsensors
+None
 
 Commands
 --------
 None
 
-Input
------
-Any signal
-
 Output
 ------
-The pin names are appended onto the input signal with their value
 
+Appends `temperature` and `humidty` values on to each input signal.
