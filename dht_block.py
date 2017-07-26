@@ -53,7 +53,7 @@ class Command:
 
 
 @discoverable
-class DHT(Block):
+class DHT22(Block):
 
     """ A block enriches incoming signals with the current values of a
     set of input pins.
