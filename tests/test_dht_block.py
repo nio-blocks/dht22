@@ -2,13 +2,13 @@ import time
 from nio.block.terminals import DEFAULT_TERMINAL
 from nio.testing.block_test_case import NIOBlockTestCase
 from nio.signal.base import Signal
-from ..dht_block import DHT
+from ..dht_block import DHT22
 
 class TestDHTBlock(NIOBlockTestCase):
 
     def test_dht_read(self):
         notified = 0
-        dht = DHT()
+        dht = DHT22()
         self.configure_block(dht, {})
         dht.start()
         # just read some temperatures and print them
