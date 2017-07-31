@@ -3,6 +3,7 @@ import os
 import subprocess
 import re
 import tempfile
+from threading import Thread
 
 from nio.block.base import Block
 from nio.signal.base import Signal
@@ -15,10 +16,10 @@ from nio.properties.bool import BoolProperty
 from nio.properties.timedelta import TimeDeltaProperty
 from nio.properties.holder import PropertyHolder
 from nio.util.discovery import discoverable
-from threading import Thread
 
 code_dir = os.path.dirname(os.path.realpath(__file__))
 dht_path = os.path.join(code_dir, 'dht_bash')
+
 
 class Command:
     def __init__(self, cmd, timeout=1):
@@ -70,7 +71,7 @@ class DHT22(Block):
         try:
             for _ in range(3):
                 command = Command(
-                    [dht_path, "2302", str(self.pin_number())], timeout = 2)
+                    [dht_path, "2302", str(self.pin_number())], timeout=2)
                 output = command.run()
                 temp = re.search("Temp =\s+([0-9.]+)", output)
                 hum = re.search("Hum =\s+([0-9.]+)", output)
