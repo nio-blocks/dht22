@@ -1,7 +1,7 @@
 {
   "nio/DHT22": {
-    "Version": "1.0.0",
-    "Language": "Python",
-    "Reference": "github.com/nio-blocks/dht22.git@v1.0.0"
+    "language": "Python",
+    "version": "0.0.1",
+    "reference": "github.com/nio-blocks/dht22.git@v0.0.1"
   }
 }
