@@ -1,4 +1,3 @@
-from enum import Enum
 import os
 import subprocess
 import re
@@ -6,16 +5,7 @@ import tempfile
 from threading import Thread
 
 from nio.block.base import Block
-from nio.signal.base import Signal
-from nio.properties.select import SelectProperty
-from nio.properties.list import ListProperty
-from nio.properties.string import StringProperty
 from nio.properties.int import IntProperty
-from nio.properties.string import StringProperty
-from nio.properties.bool import BoolProperty
-from nio.properties.timedelta import TimeDeltaProperty
-from nio.properties.holder import PropertyHolder
-from nio.util.discovery import discoverable
 
 code_dir = os.path.dirname(os.path.realpath(__file__))
 dht_path = os.path.join(code_dir, 'dht_bash')
@@ -53,7 +43,6 @@ class Command:
             self.output = pipe.read()
 
 
-@discoverable
 class DHT22(Block):
 
     """ A block enriches incoming signals with the current values of a
