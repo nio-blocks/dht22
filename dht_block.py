@@ -6,6 +6,7 @@ from threading import Thread
 
 from nio.block.base import Block
 from nio.properties.int import IntProperty
+from nio.properties import VersionProperty
 
 code_dir = os.path.dirname(os.path.realpath(__file__))
 dht_path = os.path.join(code_dir, 'dht_bash')
@@ -50,6 +51,7 @@ class DHT22(Block):
 
     """
     pin_number = IntProperty(title='Pin Number', default=0)
+    version = VersionProperty('0.1.0')
 
     def process_signals(self, signals):
         for signal in signals:
