@@ -51,7 +51,7 @@ class DHT22(Block):
 
     """
     pin_number = IntProperty(title='Pin Number', default=0)
-    version = VersionProperty('0.1.0')
+    version = VersionProperty("0.1.0")
 
     def process_signals(self, signals):
         for signal in signals:
