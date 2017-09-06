@@ -2,6 +2,9 @@
   "nio/DHT22": {
     "version": "0.1.0",
     "description": "For use with the [DHT22](http://dlnmh9ip6v2uc.cloudfront.net/datasheets/Sensors/Weather/RHT03.pdf) (also called AM2302), a digital relative humidty and temperature sensor.",
+    "categories": [
+      "Hardware"
+    ],
     "properties": {
       "pin_number": {
         "title": "Pin Number",
