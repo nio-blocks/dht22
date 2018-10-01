@@ -1,47 +1,9 @@
-import os
-import subprocess
 import re
-import tempfile
-from threading import Thread
 
-from nio.block.base import Block
-from nio.properties.int import IntProperty
-from nio.properties import VersionProperty
+from nio import Block, Signal
+from nio.properties import VersionProperty, IntProperty
 
-code_dir = os.path.dirname(os.path.realpath(__file__))
-dht_path = os.path.join(code_dir, 'dht_bash')
-
-
-class Command:
-    def __init__(self, cmd, timeout=1):
-        self.cmd = cmd
-        self.timeout = timeout
-        self.process = None
-        self.output = None
-
-    def run(self):
-        self.process = None
-        self.output = None
-        thread = Thread(target=self._target)
-        thread.start()
-        thread.join(self.timeout)
-        if thread.is_alive():
-            self.process.terminate()
-            self.process = None
-            thread.join()
-            raise TimeoutError(self.timeout)
-        out = self.output.decode()
-        self.process = None
-        self.output = None
-        return out
-
-    def _target(self):
-        with tempfile.SpooledTemporaryFile() as pipe:
-            self.process = subprocess.Popen(self.cmd, stdout=pipe)
-            self.process.communicate()
-            pipe.flush()
-            pipe.seek(0)
-            self.output = pipe.read()
+import Adafruit_DHT
 
 
 class DHT22(Block):
@@ -51,7 +13,7 @@ class DHT22(Block):
 
     """
     pin_number = IntProperty(title='Pin Number', default=0)
-    version = VersionProperty("0.1.0")
+    version = VersionProperty("1.0.0")
 
     def process_signals(self, signals):
         for signal in signals:
@@ -61,9 +23,7 @@ class DHT22(Block):
     def _read_pin(self, signal):
         try:
             for _ in range(3):
-                command = Command(
-                    [dht_path, "2302", str(self.pin_number())], timeout=2)
-                output = command.run()
+                output = Adafruit_DHT.read_retry(Adafruit_DHT.DHT22, self.pin_number())
                 temp = re.search("Temp =\s+([0-9.]+)", output)
                 hum = re.search("Hum =\s+([0-9.]+)", output)
                 self.logger.debug("Temp, Hum = {}".format(temp, hum))
