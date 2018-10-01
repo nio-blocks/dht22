@@ -25,8 +25,8 @@ class TestDHTBlock(NIOBlockTestCase):
             self.assert_num_signals_notified(i+1, dht)
             last_signal = self.last_notified[DEFAULT_TERMINAL][-1].to_dict()
             self.assertDictEqual(last_signal, {
-                "value": "test",
                 "temperature": 1.23,
                 "humidity": 4.56,
+                "value": "test"
             })
         dht.stop()

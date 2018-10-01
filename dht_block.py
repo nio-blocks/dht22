@@ -1,5 +1,3 @@
-import re
-
 from nio import Block, Signal
 from nio.properties import VersionProperty, IntProperty
 
@@ -24,8 +22,6 @@ class DHT22(Block):
         try:
             temp, hum = DHT.read_retry(DHT.DHT22, self.pin_number())
             self.logger.debug("Temp, Hum = {}".format(temp, hum))
-            if not temp or not hum:
-                self.logger.debug("Retrying DHT")
             temp = float(temp)
             hum = float(hum)
             setattr(signal, 'temperature', temp)
