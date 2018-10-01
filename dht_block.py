@@ -3,7 +3,7 @@ import re
 from nio import Block, Signal
 from nio.properties import VersionProperty, IntProperty
 
-import Adafruit_DHT
+import Adafruit_DHT as DHT
 
 
 class DHT22(Block):
@@ -22,20 +22,13 @@ class DHT22(Block):
 
     def _read_pin(self, signal):
         try:
-            for _ in range(3):
-                output = Adafruit_DHT.read_retry(Adafruit_DHT.DHT22, self.pin_number())
-                temp = re.search("Temp =\s+([0-9.]+)", output)
-                hum = re.search("Hum =\s+([0-9.]+)", output)
-                self.logger.debug("Temp, Hum = {}".format(temp, hum))
-                if not temp or not hum:
-                    self.logger.debug("Retrying DHT")
-                    continue
-                temp = float(temp.group(1))
-                hum = float(hum.group(1))
-                setattr(signal, 'temperature', temp)
-                setattr(signal, 'humidity', hum)
-                break
-            else:
-                raise IOError("Cannot read from device")
+            temp, hum = DHT.read_retry(DHT.DHT22, self.pin_number())
+            self.logger.debug("Temp, Hum = {}".format(temp, hum))
+            if not temp or not hum:
+                self.logger.debug("Retrying DHT")
+            temp = float(temp)
+            hum = float(hum)
+            setattr(signal, 'temperature', temp)
+            setattr(signal, 'humidity', hum)
         except:
             self.logger.exception("Error reading pin")

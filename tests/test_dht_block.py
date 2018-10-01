@@ -19,8 +19,8 @@ class TestDHTBlock(NIOBlockTestCase):
         self.configure_block(dht, {})
         dht.start()
         for i in range(5):
-            with patch(DHT22.__module__ + ".Adafruit_DHT.read_retry") as mock_read:
-                mock_read.return_value = "Temp = 1.23 Hum = 4.56"
+            with patch(DHT22.__module__ + ".DHT.read_retry") as mock_read:
+                mock_read.return_value = ("1.23", "4.56")
                 dht.process_signals([Signal({"value": "test"})])
             self.assert_num_signals_notified(i+1, dht)
             last_signal = self.last_notified[DEFAULT_TERMINAL][-1].to_dict()
