@@ -1,1 +1,1 @@
-Adafruit-DHT
+Adafruit-DHT~=1.3
