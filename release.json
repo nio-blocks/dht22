@@ -2,6 +2,6 @@
   "nio/DHT22": {
     "language": "Python",
     "url": "git://github.com/nio-blocks/dht22.git",
-    "version": "0.1.0"
+    "version": "1.0.0"
   }
 }

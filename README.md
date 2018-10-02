@@ -1,8 +1,8 @@
 DHT22
 =====
-For use with the [DHT22](http://dlnmh9ip6v2uc.cloudfront.net/datasheets/Sensors/Weather/RHT03.pdf) (also called AM2302), a digital relative humidty and temperature sensor.
+The DHT22 block will poll a [DHT22](http://dlnmh9ip6v2uc.cloudfront.net/datasheets/Sensors/Weather/RHT03.pdf) (also called AM2302 and RHT03), a digital relative humidty and temperature sensor using the [Adafruit DHT library](https://github.com/adafruit/Adafruit_Python_DHT) read_retry method. It is suggested not to poll the block at an interval less than 2 seconds.
 
-dht_bash is from the [Adafruit library](https://github.com/adafruit/Adafruit-Raspberry-Pi-Python-Code/blob/master/Adafruit_DHT_Driver/Adafruit_DHT)
+This block is not currently compatible with the newest Raspberry Pi 3b+ release.
 
 Properties
 ----------
